@@ -14,8 +14,6 @@ body {
 
 }
 
-
-
 h1, h2 {
   text-shadow: 2px 2px 5px rgba(255,255,255,0.6);
 }
@@ -47,7 +45,8 @@ h2 {
 }
 
 .carousel img {
-  width: 80px;
+  width: 18vw; /* s'adapte à la taille de l'écran *//* width: 80px; */
+  max-width: 80px;
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 10px;
@@ -61,17 +60,6 @@ h2 {
   transform: scale(1.1);
 }
 
-
-#photobooth {
-  position: relative;
-  width: 360px;
-  height: 450px; /* pour un ratio portrait */
-  margin-top: 0;
-  background: #000;
-  overflow: hidden;
-  aspect-ratio: 4 / 5; /* portrait */
-   /* effet dramatique visage */
-}
 
 #photobooth.invert {
   filter: invert(1);
@@ -91,7 +79,6 @@ h2 {
 
 }
 
-
 #mainSection {
   display: flex;
   justify-content: center;
@@ -102,11 +89,12 @@ h2 {
   max-width: 90%; /*  évite que ça prenne toute la largeur sur grand écran */
 }
 
-
 #photobooth {
   position: relative;
-  width: 360px;
-  height: 450px;
+  width: 80vw; /* 80% largeur écran */
+  /* height: 450px; */
+  aspect-ratio: 4 / 5; /* garde le ratio portrait */
+  margin: 0 auto;
   background: #000;
   border: 10px solid transparent rgba(255, 255, 255, 0.4);
   overflow: hidden;
