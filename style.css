@@ -19,14 +19,14 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 68px;
+  font-size: clamp(2rem, 6vw, 4rem);
   margin: 10px 10px 0;
   letter-spacing: 2px;
   font-family: 'Parisienne', cursive;
 }
 
 h2 {
-  font-size: 30px;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   letter-spacing: 2px;
   font-family: 'Parisienne', cursive;
   margin-bottom: 5px;
@@ -157,7 +157,7 @@ h2 {
   background: linear-gradient(135deg, #fff8e7, #f9d09e);
   color: #F46C22;
   border: none;
-  font-size: 22px;
+  font-size: clamp(1rem, 4vw, 1.8rem);
   padding: 14px 34px;
   border-radius: 40px;
   margin: 30px auto;
