@@ -1,0 +1,271 @@
+body {
+  background: radial-gradient(circle at 0% 0%, #fff8e7, #F46C22);
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+  /* margin: 0; */
+  padding: 20px;
+  /* padding: 0; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px; /* limite large écran */
+
+}
+
+
+
+h1, h2 {
+  text-shadow: 2px 2px 5px rgba(255,255,255,0.6);
+}
+
+h1 {
+  font-size: 68px;
+  margin: 10px 10px 0;
+  letter-spacing: 2px;
+  font-family: 'Parisienne', cursive;
+}
+
+h2 {
+  font-size: 30px;
+  letter-spacing: 2px;
+  font-family: 'Parisienne', cursive;
+  margin-bottom: 5px;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 90%;
+  margin: 10px auto;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.carousel img {
+  width: 80px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.carousel img.selected {
+  border: 2px solid #555;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  transform: scale(1.1);
+}
+
+
+#photobooth {
+  position: relative;
+  width: 360px;
+  height: 450px; /* pour un ratio portrait */
+  margin-top: 0;
+  background: #000;
+  overflow: hidden;
+  aspect-ratio: 4 / 5; /* portrait */
+   /* effet dramatique visage */
+}
+
+#photobooth.invert {
+  filter: invert(1);
+}
+
+#sideSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+
+#mainSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px; /* réduit l’espace horizontal entre photo et QR */
+  width: 100%;
+  max-width: 90%; /*  évite que ça prenne toute la largeur sur grand écran */
+}
+
+
+#photobooth {
+  position: relative;
+  width: 360px;
+  height: 450px;
+  background: #000;
+  border: 10px solid transparent rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+  border-radius: 30px; /* arrondi pour casser l’effet rectangle sec */
+  /* Halo néon blanc */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
+  0 0 80px rgba(255, 255, 255, 0.4),
+  0 0 120px rgba(255, 255, 255, 0.2);
+}
+
+#capturedPhoto {
+  width: 360px;
+  height: 450px;
+  object-fit: contain;
+}
+
+#coiffeOverlay, #logoOverlay, #hashtagOverlay {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.7));
+}
+
+#coiffeOverlay {
+  position: absolute;
+  top: 0;/* top: 5%; */
+  left: 0;/* left: 50%; */
+  width: 100%; /* width: clamp(250px, 30%, 200px);   */
+  height: 100%; /* height: auto; */
+  /* transform: translateX(-50%); */
+  object-fit: cover; /* remplira 100% quitte à rogner */
+  pointer-events: none;
+  filter: drop-shadow(15px 15px 8px rgba(0, 0, 0, 0.5));    /* ombre projetée */
+}
+
+#logoOverlay {
+  width: 18%;
+  height: auto;
+  bottom: 0px;
+  right: 10px;
+  top: auto;
+  left: auto;
+  aspect-ratio: auto; /* pour le navigateur, même si souvent pas nécessaire */
+  object-fit: contain; /* garantit qu’il reste proportionné */
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+#hashtagOverlay {
+  font-size: 30px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(12px, 2vw, 18px);
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.capture-button {
+  background: linear-gradient(135deg, #fff8e7, #f9d09e);
+  color: #F46C22;
+  border: none;
+  font-size: 22px;
+  padding: 14px 34px;
+  border-radius: 40px;
+  margin: 30px auto;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+
+}
+.capture-button:hover {
+  background: #fff3d6;
+  transform: translateY(-2px);
+}
+
+#countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(3rem, 10vw, 8rem);
+  color: white;
+  text-shadow: 2px 2px 4px black;
+  display: none;
+  z-index: 20;
+}
+
+#actionSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: 30px;
+
+
+}
+
+#actionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#actionButtons button {
+  background: linear-gradient(135deg, #fff8e7, #f9d09e);
+  color: #F46C22;
+  border: none;
+  font-size: 20px;
+  padding: 14px 34px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+}
+
+#actionButtons button:hover {
+  background: #fff3d6;
+  transform: translateY(-2px);
+}
+
+#qrcodeContainer {
+  display: none; /* important pour le cacher au départ */
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  justify-content: center; /* centrage vertical */
+}
+
+#qrcode {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-label {
+  font-family: 'Parisienne', cursive;
+  font-size: 18px;
+  color: #F46C22;
+  margin-top: 8px;
+}
+
+#loadingMessage {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.dots {
+  display: inline-block;
+  animation: blink 1s infinite;
+  font-size: 40px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}

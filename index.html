@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Photomaton - Moi, Ici -</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <h1> - Moi, ici - </h1>
+
+  <h2> - 1. Choisis une coiffe - </h2>
+  <div class="carousel">
+    <img src="coiffes/coiffe1.png" onclick="selectCoiffeHighlight(this, 'coiffe1.png')">
+    <img src="coiffes/coiffe2.png" onclick="selectCoiffeHighlight(this, 'coiffe2.png')">
+    <img src="coiffes/coiffe3.png" onclick="selectCoiffeHighlight(this, 'coiffe3.png')">
+    <img src="coiffes/coiffe4.png" onclick="selectCoiffeHighlight(this, 'coiffe4.png')">
+    <img src="coiffes/coiffe5.png" onclick="selectCoiffeHighlight(this, 'coiffe5.png')">
+    <img src="coiffes/coiffe6.png" onclick="selectCoiffeHighlight(this, 'coiffe6.png')">
+    <img src="coiffes/coiffe7.png" onclick="selectCoiffeHighlight(this, 'coiffe7.png')">
+    <img src="coiffes/coiffe8.png" onclick="selectCoiffeHighlight(this, 'coiffe8.png')">
+  </div>
+
+
+  <h2> 2. Positionne toi sous la coiffe </h2>
+  <div id="mainSection">
+    <div id="photobooth">
+      <video id="video" autoplay></video>
+      <img id="coiffeOverlay" src="coiffes/coiffe1.png">
+      <img id="logoOverlay" src="images/logo_latraverse.png">
+      <div id="countdown" style="display:none;">3</div>
+      <img id="capturedPhoto">
+    </div>
+
+    <div id="sideSection">
+      <div id="loadingMessage" style="display:none;">
+        Patiente un instant <br> <span class="dots">...</span><br>
+        <br> On prépare ton QR code<br> pour partager ta photo !
+      </div>
+      <div id="qrcodeContainer">
+        <div id="qrcode"></div>
+        <div class="qr-label">Partager</div>
+      </div>
+      <div id="actionButtons" style="display: none;">
+        <button onclick="retryPhoto()">Réessayer</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="buttonContainer">
+    <button id="snap" onclick="startCountdown()" class="capture-button">Prends la photo</button>
+  </div>
+
+
+
+  <audio id="shutterSound" src="sounds/shutter.mp3"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Photomaton - Moi, Ici -</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <h1> - Moi, ici - </h1>
+
+  <div class="carousel">
+    <h2> - 1. Choisis une coiffe - </h2>
+    <img src="coiffes/coiffe1.png" onclick="selectCoiffe('coiffe1.png')">
+    <img src="coiffes/coiffe2.png" onclick="selectCoiffe('coiffe2.png')">
+    <img src="coiffes/coiffe3.png" onclick="selectCoiffe('coiffe3.png')">
+    <img src="coiffes/coiffe4.png" onclick="selectCoiffe('coiffe4.png')">
+    <img src="coiffes/coiffe5.png" onclick="selectCoiffe('coiffe5.png')">
+    <img src="coiffes/coiffe6.png" onclick="selectCoiffe('coiffe6.png')">
+  </div>
+
+  <h2> 2. Positionne toi sous la coiffe </h2>
+
+  <div id="mainSection">
+    <div id="photobooth">
+      <video id="video" autoplay></video>
+      <img id="coiffeOverlay" src="coiffes/coiffe1.png">
+      <img id="logoOverlay" src="images/logo_latraverse.png">
+      <div id="countdown" style="display:none;">3</div>
+      <img id="capturedPhoto">
+    </div>
+
+    <div id="sideSection">
+      <div id="loadingMessage" style="display:none;">
+        Patiente un instant <br> <span class="dots">...</span><br>
+        <br> On prépare ton QR code<br> pour partager ta photo !
+      </div>
+      <div id="qrcodeContainer">
+        <div id="qrcode"></div>
+        <div class="qr-label">Partager</div>
+      </div>
+      <div id="actionButtons" style="display: none;">
+        <button onclick="retryPhoto()">Réessayer</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="buttonContainer">
+    <button id="snap" onclick="startCountdown()" class="capture-button">3. Prends la photo</button>
+  </div>
+
+
+
+  <audio id="shutterSound" src="sounds/shutter.mp3"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html> -->
