@@ -51,6 +51,96 @@ function startCountdown() {
 }
 
 // Prendre la photo avec tout bien proportionné
+// function takePhoto() {
+//   const canvas = document.createElement('canvas');
+//   canvas.width = 360;
+//   canvas.height = 450;
+//   const ctx = canvas.getContext('2d');
+
+//   // ratio vidéo vs canvas
+//   const videoRatio = video.videoWidth / video.videoHeight;
+//   const canvasRatio = canvas.width / canvas.height;
+
+//   let drawWidth, drawHeight, offsetX, offsetY;
+//   if (videoRatio > canvasRatio) {
+//     drawHeight = canvas.height;
+//     drawWidth = videoRatio * drawHeight;
+//     offsetX = (canvas.width - drawWidth) / 2;
+//     offsetY = 0;
+//   } else {
+//     drawWidth = canvas.width;
+//     drawHeight = drawWidth / videoRatio;
+//     offsetX = 0;
+//     offsetY = (canvas.height - drawHeight) / 2;
+//   }
+
+//   // dessiner la vidéo
+//   ctx.drawImage(video, offsetX, offsetY, drawWidth, drawHeight);
+
+//   // dessiner la coiffe exactement à la bonne taille
+//   const photoboothBox = document.getElementById('photobooth').getBoundingClientRect();
+//   const overlayBox = overlay.getBoundingClientRect();
+
+//   const scaleX = canvas.width / photoboothBox.width;
+//   const scaleY = canvas.height / photoboothBox.height;
+
+//   const overlayX = (overlayBox.left - photoboothBox.left) * scaleX;
+//   const overlayY = (overlayBox.top - photoboothBox.top) * scaleY;
+//   const overlayWidth = overlayBox.width * scaleX;
+//   const overlayHeight = overlayBox.height * scaleY;
+
+//   // ctx.drawImage(overlay, overlayX, overlayY, overlayWidth, overlayHeight);
+//   ctx.save();
+//   ctx.globalAlpha = 0.8;
+//   ctx.shadowColor = 'rgba(0,0,0,0.25)';
+//   ctx.shadowBlur = 20;
+//   ctx.shadowOffsetX = 0;
+//   ctx.shadowOffsetY = 0;
+//   ctx.globalCompositeOperation = 'multiply';
+//   ctx.drawImage(overlay, overlayX, overlayY, overlayWidth, overlayHeight);
+//   ctx.globalCompositeOperation = 'source-over';
+//   ctx.restore();
+
+
+//   // // logo en bas à droite
+//   // if (logo.complete) {
+//   //   const logoWidth = 60;
+//   //   const logoHeight = logo.height / logo.width * logoWidth;
+//   //   ctx.drawImage(logo, canvas.width - logoWidth - 10, canvas.height - logoHeight - 10, logoWidth, logoHeight);
+//   // }
+
+//   // logo en bas à droite avec glow néon
+// ctx.save();
+// ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+// ctx.shadowBlur = 15;
+// ctx.shadowOffsetX = 0;
+// ctx.shadowOffsetY = 0;
+// ctx.drawImage(logo, canvas.width - 70, canvas.height - 40, 60, 30);
+// ctx.restore();
+
+
+
+//   // hashtag texte en bas centre
+//   ctx.font = "20px cursive";
+//   ctx.fillStyle = "white";
+//   ctx.textAlign = "center";
+//   ctx.fillText("#LaTraverseDécoiffe", canvas.width / 2, canvas.height - 10);
+
+//   // afficher la photo capturée
+//   capturedPhoto.src = canvas.toDataURL("image/png");
+//   capturedPhoto.style.display = "block";
+
+//   // masquer le live
+//   video.style.display = 'none';
+//   overlay.style.display = 'none';
+//   logo.style.display = 'none';
+
+//   document.getElementById('loadingMessage').style.display = 'block';
+
+//   // lancer l'upload
+//   uploadToImgbb(capturedPhoto.src);
+// }
+
 function takePhoto() {
   const canvas = document.createElement('canvas');
   canvas.width = 360;
@@ -77,10 +167,9 @@ function takePhoto() {
   // dessiner la vidéo
   ctx.drawImage(video, offsetX, offsetY, drawWidth, drawHeight);
 
-  // dessiner la coiffe exactement à la bonne taille
+  // calculer les dimensions de la coiffe
   const photoboothBox = document.getElementById('photobooth').getBoundingClientRect();
   const overlayBox = overlay.getBoundingClientRect();
-
   const scaleX = canvas.width / photoboothBox.width;
   const scaleY = canvas.height / photoboothBox.height;
 
@@ -89,21 +178,41 @@ function takePhoto() {
   const overlayWidth = overlayBox.width * scaleX;
   const overlayHeight = overlayBox.height * scaleY;
 
+  // dessiner la coiffe avec transparence et halo sombre
+  ctx.save();
+  ctx.globalAlpha = 0.8;
+  ctx.shadowColor = 'rgba(0,0,0,0.25)';
+  ctx.shadowBlur = 20;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+  ctx.globalCompositeOperation = 'multiply';
   ctx.drawImage(overlay, overlayX, overlayY, overlayWidth, overlayHeight);
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.restore();
 
-  // logo en bas à droite
-  if (logo.complete) {
-    const logoWidth = 60;
-    const logoHeight = logo.height / logo.width * logoWidth;
-    ctx.drawImage(logo, canvas.width - logoWidth - 10, canvas.height - logoHeight - 10, logoWidth, logoHeight);
-  }
+  // dessiner le logo en bas à droite avec glow néon
+  ctx.save();
+  ctx.shadowColor = 'rgba(255, 255, 255, 1)'; // opacité à 1
+  ctx.shadowBlur = 30; // plus grand
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+
+  const logoWidth = 60;
+  const logoHeight = logo.height / logo.width * logoWidth;
+  ctx.drawImage(logo, canvas.width - logoWidth - 10, canvas.height - logoHeight - 10, logoWidth, logoHeight);
+  ctx.restore();
 
 
-  // hashtag texte en bas centre
-  ctx.font = "20px cursive";
+  // dessiner le hashtag centré en bas
+  ctx.save();
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  ctx.shadowBlur = 8;
+  ctx.font = "15px 'Montserrat', sans-serif"; // une seule fois
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
   ctx.fillText("#LaTraverseDécoiffe", canvas.width / 2, canvas.height - 10);
+  ctx.restore();
+
 
   // afficher la photo capturée
   capturedPhoto.src = canvas.toDataURL("image/png");
