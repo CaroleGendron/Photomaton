@@ -4,13 +4,13 @@ body {
   color: white;
   text-align: center;
   margin: 0 auto;
-  /* margin: 0; */
-  padding: 20px;
-  /* padding: 0; */
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 1000px; /* limite large écran */
+  height: 100%;
+  margin: 0;
+  padding: 0;
 
 }
 
@@ -45,13 +45,15 @@ h2 {
 }
 
 .carousel img {
-  width: 18vw; /* s'adapte à la taille de l'écran *//* width: 80px; */
+  width: 18vw;
   max-width: 80px;
+  height: auto;   /* ✅ conserve le ratio */
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: all 0.3s;
+  object-fit: contain; /* au cas où */
 }
 
 .carousel img.selected {
@@ -59,7 +61,6 @@ h2 {
   box-shadow: 0 6px 12px rgba(0,0,0,0.4);
   transform: scale(1.1);
 }
-
 
 #sideSection {
   display: flex;
@@ -87,18 +88,17 @@ h2 {
 
 #photobooth {
   position: relative;
-  width: 80vw; /* 80% largeur écran */
-  /* height: 450px; */
-  aspect-ratio: 4 / 5; /* garde le ratio portrait */
+  height: 80vh;
+  aspect-ratio: 4 / 5;
+  width: auto;
+  max-width: 80vw;
   margin: 0 auto;
   background: #000;
-  border: 10px solid transparent rgba(255, 255, 255, 0.4);
   overflow: hidden;
-  border-radius: 30px; /* arrondi pour casser l’effet rectangle sec */
-  /* Halo néon blanc */
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
-  0 0 80px rgba(255, 255, 255, 0.4),
-  0 0 120px rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.6),
+              0 0 80px rgba(255,255,255,0.4),
+              0 0 120px rgba(255,255,255,0.2);
 }
 
 #photobooth.invert {
@@ -118,17 +118,23 @@ h2 {
   filter: drop-shadow(0 0 10px rgba(255,255,255,0.7));
 }
 
+
 #coiffeOverlay {
   position: absolute;
-  top: 0;/* top: 5%; */
+  top: 0%; /* décale la coiffe au-dessus du cadre *//* top: 0;top: 5%; */
   left: 0;/* left: 50%; */
   width: 100%; /* width: clamp(250px, 30%, 200px);   */
-  height: 100%; /* height: auto; */
+  height: 90%; /* height: auto; */
   /* transform: translateX(-50%); */
   object-fit: cover; /* remplira 100% quitte à rogner */
   pointer-events: none;
-  filter: drop-shadow(15px 15px 8px rgba(0, 0, 0, 0.5));    /* ombre projetée */
+  filter: drop-shadow(0 8px 6px rgba(0,0,0,0.4)); /* ombre projetée */
+  mix-blend-mode: multiply; /* ou overlay, screen, soft-light... */
+  opacity: 0.98;
 }
+
+
+
 
 #logoOverlay {
   width: 18%;
