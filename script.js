@@ -180,9 +180,9 @@ function takePhoto() {
 
   // dessiner la coiffe avec transparence et halo sombre
   ctx.save();
-  ctx.globalAlpha = 0.8;
+  ctx.globalAlpha = 0.98;
   ctx.shadowColor = 'rgba(0,0,0,0.25)';
-  ctx.shadowBlur = 20;
+  // ctx.shadowBlur = 3;
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
   ctx.globalCompositeOperation = 'multiply';
