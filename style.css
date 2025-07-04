@@ -3,15 +3,14 @@ body {
   font-family: 'Raleway', sans-serif;
   color: white;
   text-align: center;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1000px; /* limite large écran */
-  height: 100%;
-  margin: 0;
-  padding: 0;
-
+  max-width: 1000px;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1, h2 {
@@ -20,7 +19,7 @@ h1, h2 {
 
 h1 {
   font-size: clamp(2rem, 6vw, 4rem);
-  margin: 10px 10px 0;
+  margin: 10px;
   letter-spacing: 2px;
   font-family: 'Parisienne', cursive;
 }
@@ -45,15 +44,14 @@ h2 {
 }
 
 .carousel img {
-  width: 18vw;
-  max-width: 80px;
-  height: auto;   /* ✅ conserve le ratio */
+  width: clamp(60px, 18vw, 80px);
+  height: auto;
   cursor: pointer;
   border: 2px solid transparent;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: all 0.3s;
-  object-fit: contain; /* au cas où */
+  object-fit: contain;
 }
 
 .carousel img.selected {
@@ -62,18 +60,11 @@ h2 {
   transform: scale(1.1);
 }
 
-#sideSection {
+#sideSection, #actionButtons {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-}
-
-#video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
 }
 
 #mainSection {
@@ -81,18 +72,17 @@ h2 {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 25px; /* réduit l’espace horizontal entre photo et QR */
+  gap: 25px;
   width: 100%;
-  max-width: 90%; /*  évite que ça prenne toute la largeur sur grand écran */
+  max-width: 90%;
 }
 
+/* Photobooth responsive avec aspect ratio */
 #photobooth {
   position: relative;
-  height: 80vh;
+  width: 90vw;
+  max-width: 500px;
   aspect-ratio: 4 / 5;
-  width: auto;
-  max-width: 80vw;
-  margin: 0 auto;
   background: #000;
   overflow: hidden;
   border-radius: 30px;
@@ -105,11 +95,12 @@ h2 {
   filter: invert(1);
 }
 
-#capturedPhoto {
+#video, #capturedPhoto {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  border-radius: 30px;
 }
 
 #coiffeOverlay, #logoOverlay, #hashtagOverlay {
@@ -118,60 +109,47 @@ h2 {
   filter: drop-shadow(0 0 10px rgba(255,255,255,0.7));
 }
 
-
 #coiffeOverlay {
-  position: absolute;
-  top: 0%; /* décale la coiffe au-dessus du cadre *//* top: 0;top: 5%; */
-  left: 0;/* left: 50%; */
-  width: 100%; /* width: clamp(250px, 30%, 200px);   */
-  height: 90%; /* height: auto; */
-  /* transform: translateX(-50%); */
-  object-fit: cover; /* remplira 100% quitte à rogner */
-  pointer-events: none;
-  filter: drop-shadow(0 8px 6px rgba(0,0,0,0.4)); /* ombre projetée */
-  mix-blend-mode: multiply; /* ou overlay, screen, soft-light... */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
   opacity: 0.98;
+  filter: drop-shadow(0 8px 6px rgba(0,0,0,0.4));
 }
-
-
-
 
 #logoOverlay {
   width: 18%;
   height: auto;
-  bottom: 0px;
+  bottom: 0;
   right: 10px;
-  top: auto;
-  left: auto;
-  aspect-ratio: auto; /* pour le navigateur, même si souvent pas nécessaire */
-  object-fit: contain; /* garantit qu’il reste proportionné */
   opacity: 0.8;
-  pointer-events: none;
 }
 
 #hashtagOverlay {
-  font-size: 30px;
+  font-size: clamp(12px, 2vw, 18px);
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: clamp(12px, 2vw, 18px);
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-.capture-button {
+.capture-button, #actionButtons button {
   background: linear-gradient(135deg, #fff8e7, #f9d09e);
   color: #F46C22;
   border: none;
   font-size: clamp(1rem, 4vw, 1.8rem);
   padding: 14px 34px;
   border-radius: 40px;
-  margin: 30px auto;
+  margin: 20px auto;
   box-shadow: 0 6px 12px rgba(0,0,0,0.3);
   transition: all 0.3s;
-
 }
-.capture-button:hover {
+
+.capture-button:hover, #actionButtons button:hover {
   background: #fff3d6;
   transform: translateY(-2px);
 }
@@ -188,58 +166,20 @@ h2 {
   z-index: 20;
 }
 
-#actionSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: 30px;
-
-
-}
-
-#actionButtons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#actionButtons button {
-  background: linear-gradient(135deg, #fff8e7, #f9d09e);
-  color: #F46C22;
-  border: none;
-  font-size: 20px;
-  padding: 14px 34px;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  transition: all 0.3s;
-}
-
-#actionButtons button:hover {
-  background: #fff3d6;
-  transform: translateY(-2px);
-}
-
+/* QR code */
 #qrcodeContainer {
-  display: none; /* important pour le cacher au départ */
+  display: none;
   flex-direction: column;
   align-items: center;
   background: white;
   padding: 12px;
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-  justify-content: center; /* centrage vertical */
 }
 
 #qrcode {
   width: 140px;
   height: 140px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .qr-label {
@@ -265,24 +205,16 @@ h2 {
   50% { opacity: 1; }
 }
 
-/* reduire taille photobooth sur mobile */
+/* Bonus fix ultra mobile */
 @media (max-width: 600px) {
   #photobooth {
     width: 90vw;
-    max-height: 60vh; /* plus petit en hauteur */
+    aspect-ratio: 4 / 5;
   }
-}
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 48px;
-  }
-  h2 {
-    font-size: 28px;
-  }
+  h1 { font-size: 48px; }
+  h2 { font-size: 28px; }
   .capture-button, #actionButtons button {
     font-size: 20px;
     padding: 12px 28px;
   }
 }
-

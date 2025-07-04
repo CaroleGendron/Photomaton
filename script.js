@@ -112,7 +112,7 @@ ctx.save();
 ctx.beginPath();
 ctx.arc(x + logoWidth / 2, y + logoHeight / 2, 35, 0, Math.PI * 2);
 ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-ctx.shadowColor = 'rgba(255, 255, 255, 1)';
+ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
 ctx.shadowBlur = 30;
 ctx.fill();
 ctx.closePath();
